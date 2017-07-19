@@ -7,6 +7,7 @@ public class BlinkerController : MonoBehaviour {
     public GameObject bulletPrefabNormal;
     public GameObject homingMissilePrefab;
     public GameObject laserPrefab;
+    public GameObject hPack;
     public Transform bulletSpawn;
     public Transform RightSpawn;
     public Transform FarRightSpawn;
@@ -21,16 +22,16 @@ public class BlinkerController : MonoBehaviour {
 
     int cycle = 1;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
 
         currentHealth = startHealth;
         healthBar.maxValue = startHealth;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update() {
 
         if (Allowfire)
         {
@@ -43,7 +44,7 @@ public class BlinkerController : MonoBehaviour {
                 timeToWait = 5;
             }
 
-            if(cycle == 2)
+            if (cycle == 2)
             {
                 StartCoroutine(burst());
 
@@ -82,11 +83,13 @@ public class BlinkerController : MonoBehaviour {
             if (cycle == 7)
             {
                 laser();
-                timeToWait = 6;
+                timeToWait = 12;
+                healp();
             }
 
             if (cycle == 8)
             {
+                laser();
                 laser();
                 timeToWait = 4;
             }
@@ -97,7 +100,7 @@ public class BlinkerController : MonoBehaviour {
                 if (randomNum == 0)
                 {
                     laser();
-                    timeToWait = 4;
+                    timeToWait = 2;
                 }
 
                 if (randomNum == 1)
@@ -111,7 +114,7 @@ public class BlinkerController : MonoBehaviour {
         }
 
 
-        if(currentHealth <= healthBar.maxValue/10)
+        if (currentHealth <= healthBar.maxValue / 10)
         {
             cycle++;
             startHealth = startHealth * 1.4f;
@@ -121,7 +124,7 @@ public class BlinkerController : MonoBehaviour {
 
         }
 
-	}
+    }
 
     void OnTriggerEnter2D()
     {
@@ -137,18 +140,18 @@ public class BlinkerController : MonoBehaviour {
 
             if (col.gameObject.name == "Bullet(Clone)")
             {
-                currentHealth = currentHealth - 4;
+                currentHealth = currentHealth - 5;
                 Debug.Log("normalbullet hit");
             }
 
             if (col.gameObject.name == "PowerShot(Clone)")
             {
-                currentHealth = currentHealth - 10;
+                currentHealth = currentHealth - 15;
             }
 
             if (col.gameObject.name == "BulletBarrier(Clone)")
             {
-                currentHealth = currentHealth - 30;
+                currentHealth = currentHealth - 500;
             }
 
         }
@@ -211,7 +214,7 @@ public class BlinkerController : MonoBehaviour {
 
         if (whichSpawn == 1)
         {
-            var bullet = (GameObject)Instantiate(laserPrefab,FarLeftSpawn.position,FarLeftSpawn.rotation);
+            var bullet = (GameObject)Instantiate(laserPrefab, FarLeftSpawn.position, FarLeftSpawn.rotation);
 
             bullet.GetComponent<LaserDrone>().target = GameObject.Find("Player").transform;
         }
@@ -236,6 +239,46 @@ public class BlinkerController : MonoBehaviour {
 
             bullet.GetComponent<LaserDrone>().target = GameObject.Find("Player").transform;
         }
+
+    }
+
+    void healp()
+    {
+
+        var whichSpawn = Mathf.Floor(Random.value * 4);
+
+        if (whichSpawn == 1)
+        {
+            var bullet = (GameObject)Instantiate(hPack, FarLeftSpawn.position, FarLeftSpawn.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
+
+            Destroy(bullet, 4f);
+        }
+
+        if (whichSpawn == 2)
+        {
+            var bullet = (GameObject)Instantiate(hPack, LeftSpawn.position, LeftSpawn.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
+
+            Destroy(bullet, 4f);
+        }
+
+        if (whichSpawn == 3)
+        {
+            var bullet = (GameObject)Instantiate(hPack, RightSpawn.position, RightSpawn.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
+
+            Destroy(bullet, 4f);
+        }
+
+        if (whichSpawn == 4)
+        {
+            var bullet = (GameObject)Instantiate(hPack, FarRightSpawn.position, FarRightSpawn.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
+
+            Destroy(bullet, 4f);
+        }
+
 
     }
 }

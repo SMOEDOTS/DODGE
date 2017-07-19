@@ -102,12 +102,12 @@ public class playerController : MonoBehaviour
         }
         if ((Input.GetKey(KeyCode.X)) && (Allowfire2))
         {   
-            //PowerShot Easy hit (x5 dmg)
+            //PowerShot Easy hit (x3 dmg)
             FireSnipe();
         }
         if ((Input.GetKey(KeyCode.C)) && (Allowfire3))
         {
-            //Barricade bullet (x10 dmg)
+            //Barricade bullet (x100 dmg)
             FireSlow();
         }
 
@@ -167,7 +167,7 @@ public class playerController : MonoBehaviour
 
     IEnumerator AllowToFire2()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         Allowfire2 = true;
     }
 
@@ -209,6 +209,14 @@ public class playerController : MonoBehaviour
             {
                 Debug.Log("MissileBoomOuch");
                 currentHp = currentHp - 4;
+                Debug.Log(currentHp);
+                Destroy(col.gameObject);
+            }
+
+            if (col.gameObject.name == "HealthPack(Clone)")
+            {
+                Debug.Log("RENOOOOOO JACKSON");
+                currentHp = currentHp + 40;
                 Debug.Log(currentHp);
                 Destroy(col.gameObject);
             }

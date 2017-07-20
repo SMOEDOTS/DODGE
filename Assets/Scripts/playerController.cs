@@ -192,32 +192,24 @@ public class playerController : MonoBehaviour
 
             if (col.gameObject.name == "EnemyBulletDefault(Clone)")
             {
-                Debug.Log("ouch");
                 currentHp = currentHp - 8;
-                Debug.Log(currentHp);
                 Destroy(col.gameObject);
             }
 
             if (col.gameObject.name == "Missile(Clone)")
             {
-                Debug.Log("MissileOuch");
                 currentHp = currentHp - 8;
-                Debug.Log(currentHp);
             }
 
             if (col.gameObject.name == "BoomPew(Clone)")
             {
-                Debug.Log("MissileBoomOuch");
                 currentHp = currentHp - 4;
-                Debug.Log(currentHp);
-                Destroy(col.gameObject);
             }
 
             if (col.gameObject.name == "HealthPack(Clone)")
             {
                 Debug.Log("RENOOOOOO JACKSON");
                 currentHp = currentHp + 40;
-                Debug.Log(currentHp);
                 Destroy(col.gameObject);
             }
 
@@ -230,7 +222,6 @@ public class playerController : MonoBehaviour
     {
         Debug.Log("gitgud");
         currentHp = currentHp - 1;
-        Debug.Log(currentHp);
         hp.value = currentHp;
     }
 

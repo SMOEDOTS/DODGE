@@ -33,6 +33,12 @@ public class BlinkerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            cycle++;
+            Debug.Log("boss cycle " + cycle);
+        }
+
         if (Allowfire)
         {
             Allowfire = false;
@@ -135,13 +141,11 @@ public class BlinkerController : MonoBehaviour {
     {
         if (col.gameObject.layer == 8 || col.gameObject.layer == 11)
         {
-            Debug.Log("bullet detected!");
             Destroy(col.gameObject);
 
             if (col.gameObject.name == "Bullet(Clone)")
             {
                 currentHealth = currentHealth - 5;
-                Debug.Log("normalbullet hit");
             }
 
             if (col.gameObject.name == "PowerShot(Clone)")
@@ -157,7 +161,6 @@ public class BlinkerController : MonoBehaviour {
         }
 
         healthBar.value = currentHealth;
-        Debug.Log(healthBar.value);
     }
 
 

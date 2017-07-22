@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class playerController : MonoBehaviour
     }
 
     void Update () {
+
+        if (currentHp <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
@@ -182,7 +188,7 @@ public class playerController : MonoBehaviour
         if(col.gameObject.name == "BlinkerBoss")
         {
             GetComponent<Animator>().Play("PlayerHurt");
-            currentHp = currentHp - 10;
+            currentHp = currentHp - 100;
         }
 
         if(col.gameObject.layer == 10)
@@ -192,24 +198,28 @@ public class playerController : MonoBehaviour
 
             if (col.gameObject.name == "EnemyBulletDefault(Clone)")
             {
-                currentHp = currentHp - 8;
+                currentHp = currentHp - 2;
                 Destroy(col.gameObject);
             }
 
             if (col.gameObject.name == "Missile(Clone)")
             {
                 currentHp = currentHp - 8;
+                Destroy(col.gameObject);
             }
 
             if (col.gameObject.name == "BoomPew(Clone)")
             {
-                currentHp = currentHp - 4;
+                currentHp = currentHp - 5;
+                Destroy(col.gameObject);
             }
 
             if (col.gameObject.name == "HealthPack(Clone)")
             {
                 Debug.Log("RENOOOOOO JACKSON");
-                currentHp = currentHp + 40;
+                GetComponent<Animator>().Play("ShipHeal");
+                Destroy(col.gameObject);
+                currentHp = currentHp + 60;
                 Destroy(col.gameObject);
             }
 
@@ -221,7 +231,7 @@ public class playerController : MonoBehaviour
     void HitByRay()
     {
         Debug.Log("gitgud");
-        currentHp = currentHp - 1;
+        currentHp = currentHp - 2;
         hp.value = currentHp;
     }
 

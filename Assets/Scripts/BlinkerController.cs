@@ -17,6 +17,7 @@ public class BlinkerController : MonoBehaviour {
     public Transform bspawn2;
     public Transform bspawn3;
     public Transform bspawn4;
+    public Transform tspawn;
     public int bulletSpeed;
     bool Allowfire = true;
     bool HpTimer = false;
@@ -59,7 +60,7 @@ public class BlinkerController : MonoBehaviour {
             {
                 defaultShot();
 
-                timeToWait = 5;
+                timeToWait = 8;
             }
 
             if (cycle == 2)
@@ -78,28 +79,28 @@ public class BlinkerController : MonoBehaviour {
 
             if (cycle == 4)
             {
-                StartCoroutine(sburst(3));
+                tShot();
 
                 timeToWait = 5;
             }
 
             if (cycle == 5)
             {
-                StartCoroutine(sburst(5));
+                StartCoroutine(sburst(3));
 
                 timeToWait = 5;
             }
 
             if (cycle == 6)
             {
-                missile();
+                StartCoroutine(tburst(4,0.3f));
 
-                timeToWait = 4;
+                timeToWait = 5;
             }
 
             if (cycle == 7)
             {
-                StartCoroutine(burstmissile());
+                StartCoroutine(tburst(12,0.1f));
 
                 timeToWait = 5;
             }
@@ -107,18 +108,32 @@ public class BlinkerController : MonoBehaviour {
             if (cycle == 8)
             {
                 missile();
-                StartCoroutine(sburst(5));
-                timeToWait = 5;
+                tShot();
+
+                timeToWait = 4;
             }
 
             if (cycle == 9)
             {
                 StartCoroutine(burstmissile());
-                StartCoroutine(sburst(2));
                 timeToWait = 5;
             }
 
             if (cycle == 10)
+            {
+                missile();
+                StartCoroutine(sburst(5));
+                timeToWait = 5;
+            }
+
+            if (cycle == 11)
+            {
+                StartCoroutine(burstmissile());
+                StartCoroutine(tburst(5,0.4f));
+                timeToWait = 4;
+            }
+
+            if (cycle == 12)
             {
                 
                     if (allowHpax)
@@ -133,51 +148,45 @@ public class BlinkerController : MonoBehaviour {
                 timeToWait = 3;
             }
 
-            if (cycle == 11)
+            if (cycle == 13)
             {
                 StartCoroutine(burstmissile());
                 StartCoroutine(sburst(7));
+                StartCoroutine(tburst(5,0.8f));
                 timeToWait = 5;
-            }
-
-            if (cycle == 12)
-            {
-                StartCoroutine(burstmissile());
-
-                timeToWait = 2.5f;
-            }
-
-            if (cycle == 13)
-            {
-                laser();
-                timeToWait = 12;
             }
 
             if (cycle == 14)
             {
-                laser();
-                laser();
-                timeToWait = 4;
+                StartCoroutine(burstmissile());
+                StartCoroutine(sburst(1));
+                StartCoroutine(tburst(2,0.3f));
+                timeToWait = 3f;
             }
 
             if (cycle == 15)
             {
                 laser();
-                laser();
-                StartCoroutine(sburst(5));
-                timeToWait = 4;
+                timeToWait = 12;
+                healp();
             }
 
             if (cycle == 16)
             {
                 laser();
                 laser();
-                StartCoroutine(burstmissile());
-                StartCoroutine(sburst(5));
-                timeToWait = 5;
+                timeToWait = 4;
             }
 
             if (cycle == 17)
+            {
+                missile();
+                StartCoroutine(tburst(9,0.3f));
+                timeToWait = 5;
+            }
+
+
+            if (cycle == 18)
             {
                 laser();
                 laser();
@@ -185,7 +194,43 @@ public class BlinkerController : MonoBehaviour {
                 timeToWait = 4;
             }
 
-            if (cycle == 18)
+            if (cycle == 19)
+            {
+                laser();
+                laser();
+                missile();
+                StartCoroutine(tburst(5,0.5f));
+                timeToWait = 5;
+            }
+
+            if (cycle == 20)
+            {
+                laser();
+                laser();
+                StartCoroutine(burstmissile());
+                StartCoroutine(sburst(5));
+                timeToWait = 5;
+            }
+
+            if (cycle == 21)
+            {
+                laser();
+                laser();
+                StartCoroutine(burstmissile());
+                StartCoroutine(tburst(5, 0.3f));
+                timeToWait = 5;
+            }
+
+            if (cycle == 22)
+            {
+                laser();
+                laser();
+                StartCoroutine(sburst(5));
+                StartCoroutine(tburst(5, 0.5f));
+                timeToWait = 4;
+            }
+
+            if (cycle == 23)
             {
                 var randomNum = Mathf.Round(Random.value);
                 if (randomNum == 0)
@@ -194,6 +239,7 @@ public class BlinkerController : MonoBehaviour {
                     laser();
                     laser();
                     StartCoroutine(sburst(5));
+                    StartCoroutine(tburst(5, 0.4f));
                     timeToWait = 4;
                 }
 
@@ -205,21 +251,23 @@ public class BlinkerController : MonoBehaviour {
                 }
             }
 
-            if (cycle == 19)
+            if (cycle == 24)
             {
                 missile();
                 StartCoroutine(sburst(1));
+                StartCoroutine(tburst(4, 0.6f));
                 laser();
                 timeToWait = 2;
             }
 
-            if (cycle == 20)
+            if (cycle == 25)
             {
                     laser();
                     laser();
                     laser();
                     StartCoroutine(burstmissile());
-                    StartCoroutine(sburst(8));
+                    StartCoroutine(sburst(3));
+                    StartCoroutine(tburst(10, 0.4f));
                     timeToWait = 8;
                     healp();
             }
@@ -243,12 +291,12 @@ public class BlinkerController : MonoBehaviour {
 
             if (col.gameObject.name == "Bullet(Clone)")
             {
-                currentHealth = currentHealth - 2;
+                currentHealth = currentHealth - 5;
             }
 
             if (col.gameObject.name == "PowerShot(Clone)")
             {
-                currentHealth = currentHealth - 6;
+                currentHealth = currentHealth - 15;
             }
 
             if (col.gameObject.name == "BulletBarrier(Clone)")
@@ -263,7 +311,7 @@ public class BlinkerController : MonoBehaviour {
         if (currentHealth <= healthBar.maxValue / 10 || currentHealth <= 0)
         {
             cycle++;
-            startHealth = startHealth * 1.1f;
+            startHealth = startHealth * 1.05f;
             currentHealth = startHealth;
             healthBar.maxValue = startHealth;
             Debug.Log("boss cycle " + cycle);
@@ -287,21 +335,30 @@ public class BlinkerController : MonoBehaviour {
         }
     }
 
+    IEnumerator tburst(int rpt,float t2w)
+    {
+        for (int i = 0; i < rpt; i++)
+        {
+            tShot();
+            yield return new WaitForSeconds(t2w);
+        }
+    }
+
     IEnumerator sburst(int rpt)
     {
         for (int i = 0; i < rpt; i++)
         {
             sgunShot();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.6f);
         }
     }
 
     IEnumerator burstmissile()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             missile();
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.8f);
         }
     }
 
@@ -332,7 +389,19 @@ public class BlinkerController : MonoBehaviour {
 
         bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
 
-        Destroy(bullet, 2.2f);
+        Destroy(bullet, 3.2f);
+    }
+
+    void tShot()
+    {
+        var bullet = (GameObject)Instantiate(
+        bulletPrefabNormal,
+        tspawn.position,
+        tspawn.rotation);
+
+        bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
+
+        Destroy(bullet, 3.2f);
     }
 
     void sgunShot()
@@ -344,7 +413,7 @@ public class BlinkerController : MonoBehaviour {
 
         bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * -bulletSpeed;
 
-        Destroy(bullet, 2.2f);
+        Destroy(bullet, 1.8f);
 
 
         var bullet1 = (GameObject)Instantiate(

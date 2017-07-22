@@ -173,13 +173,13 @@ public class playerController : MonoBehaviour
 
     IEnumerator AllowToFire2()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.8f);
         Allowfire2 = true;
     }
 
     IEnumerator AllowToFire3()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
         Allowfire3 = true;
     }
 
@@ -198,7 +198,7 @@ public class playerController : MonoBehaviour
 
             if (col.gameObject.name == "EnemyBulletDefault(Clone)")
             {
-                currentHp = currentHp - 2;
+                currentHp = currentHp - 3;
                 Destroy(col.gameObject);
             }
 
@@ -210,7 +210,7 @@ public class playerController : MonoBehaviour
 
             if (col.gameObject.name == "BoomPew(Clone)")
             {
-                currentHp = currentHp - 5;
+                currentHp = currentHp - 4;
                 Destroy(col.gameObject);
             }
 
@@ -219,7 +219,7 @@ public class playerController : MonoBehaviour
                 Debug.Log("RENOOOOOO JACKSON");
                 GetComponent<Animator>().Play("ShipHeal");
                 Destroy(col.gameObject);
-                currentHp = currentHp + 60;
+                currentHp = currentHp + 80;
                 Destroy(col.gameObject);
             }
 
@@ -231,7 +231,7 @@ public class playerController : MonoBehaviour
     void HitByRay()
     {
         Debug.Log("gitgud");
-        currentHp = currentHp - 2;
+        currentHp = currentHp - 3;
         hp.value = currentHp;
     }
 

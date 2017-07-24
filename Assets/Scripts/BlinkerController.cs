@@ -272,6 +272,57 @@ public class BlinkerController : MonoBehaviour {
                     healp();
             }
 
+            if (cycle == 26)
+            {
+                StartCoroutine(tburst(10, 0.1f));
+                sgunShot();
+                timeToWait = 1;
+            }
+
+            if (cycle == 27)
+            {
+                laser();
+                StartCoroutine(tburst(40, 0.1f));
+                timeToWait = 5;
+            }
+
+            if (cycle == 28)
+            {
+                laser();
+                laser();
+                laser();
+                laser();
+                laser();
+                StartCoroutine(sburst(4));
+                timeToWait = 5;
+            }
+
+            if (cycle == 29)
+            {
+                tShot();
+                StartCoroutine(burstmissile());
+                tShot();
+                laser();
+                tShot();
+                timeToWait = 5;
+            }
+
+            if (cycle == 30)
+            {
+                laser();
+                laser();
+                laser();
+                laser();
+                laser(); 
+                laser();
+                laser();
+                laser();
+                laser();
+                StartCoroutine(burstmissile());
+                StartCoroutine(tburst(15, 0.2f));
+                timeToWait = 5;
+            }
+
 
             StartCoroutine(waitSome());
         }
@@ -311,7 +362,7 @@ public class BlinkerController : MonoBehaviour {
         if (currentHealth <= healthBar.maxValue / 10 || currentHealth <= 0)
         {
             cycle++;
-            startHealth = startHealth * 1.05f;
+            startHealth = startHealth * 1.08f;
             currentHealth = startHealth;
             healthBar.maxValue = startHealth;
             Debug.Log("boss cycle " + cycle);
@@ -358,22 +409,22 @@ public class BlinkerController : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             missile();
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.6f);
         }
     }
 
     IEnumerator reno()
     {
         healp();
-        var ttw = 15;
+        var ttw = 30;
         var RNG = Mathf.Round(Random.value);
         if (RNG == 0)
         {
-            ttw = 15;
+            ttw = 25;
         }
         else
         {
-            ttw = 20;
+            ttw = 30;
         }
         yield return new WaitForSeconds(ttw);
         HpTimer = true;

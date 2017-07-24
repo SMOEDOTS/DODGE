@@ -198,7 +198,7 @@ public class playerController : MonoBehaviour
 
             if (col.gameObject.name == "EnemyBulletDefault(Clone)")
             {
-                currentHp = currentHp - 3;
+                currentHp = currentHp - 5;
                 Destroy(col.gameObject);
             }
 
@@ -221,6 +221,11 @@ public class playerController : MonoBehaviour
                 Destroy(col.gameObject);
                 currentHp = currentHp + 80;
                 Destroy(col.gameObject);
+
+                if (currentHp > startHealth)
+                {
+                    currentHp = startHealth;
+                }
             }
 
         }

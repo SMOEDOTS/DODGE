@@ -313,13 +313,10 @@ public class BlinkerController : MonoBehaviour {
                 laser();
                 laser();
                 laser();
-                laser(); 
-                laser();
-                laser();
-                laser();
                 laser();
                 StartCoroutine(burstmissile());
                 StartCoroutine(tburst(15, 0.2f));
+                StartCoroutine(sburst(5));
                 timeToWait = 5;
             }
 
